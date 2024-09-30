@@ -6,14 +6,14 @@ import {
   Content,
   Footer,
   Header,
-} from "./styles";
-import { ProductType, useCart } from "cart/CartsContext";
+} from "../styles";
+import { useCart } from "cart/CartContext";
 import Products from "products/Products";
 import { CiShoppingCart } from "react-icons/ci";
 import Cart from "cart/Cart";
 import Modal from "../components/Modal/Modal";
 
-const CartButton = ({ onClick }: { onClick: () => void }) => {
+const CartButton = ({ onClick }) => {
   const { cart } = useCart();
   const cartTotal = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -26,16 +26,17 @@ const CartButton = ({ onClick }: { onClick: () => void }) => {
 };
 
 const useGetProducts = () => {
-  const baseUrl = "https://secompp24-api.onrender.com";
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const baseUrl = 'https://dummyjson.com/products';
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const getProducts = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${baseUrl}/products`);
+      const response = await fetch(`${baseUrl}`);
       const data = await response.json();
+      const {products} = data;
       setProducts(() =>
-        data.map((product: ProductType) => ({ ...product, quantity: 0 }))
+        products.map((product) => ({ ...product, quantity: 0 }))
       );
     } catch (error) {
       console.error(error);
@@ -51,7 +52,7 @@ const useGetProducts = () => {
   return { products, isLoading };
 };
 
-const Home: React.FC = () => {
+const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { products, isLoading } = useGetProducts();
   if (isLoading) {

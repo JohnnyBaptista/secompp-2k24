@@ -1,13 +1,7 @@
 import React, { ReactElement } from "react";
 import { CounterContainer, CounterButton, CounterValue } from "./CounterStyles";
 
-const Counter: React.FC<{
-  label?: string;
-  icon?: ReactElement;
-  startingValue?: number;
-  onIncrement?: () => void;
-  onDecrement?: () => void;
-}> = ({ label, icon, startingValue, onDecrement, onIncrement }) => {
+const Counter = ({ label, icon, startingValue, onDecrement, onIncrement }) => {
   const [count, setCount] = React.useState(startingValue || 0);
 
   const increment = () => {

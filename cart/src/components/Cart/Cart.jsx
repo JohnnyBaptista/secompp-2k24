@@ -1,6 +1,6 @@
 import React from "react";
 import Counter from "host/Counter";
-import { useCart, CartProvider } from "../../CartsContext";
+import { useCart, CartProvider } from "../../CartContext";
 import {
   Card,
   CartContainer,

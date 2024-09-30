@@ -8,7 +8,7 @@ import {
   ProductContainer,
 } from "./ProductStyles";
 
-import { useCart } from "cart/CartsContext";
+import { useCart } from "cart/CartContext";
 
 const Products = ({ products }) => {
   const { cart, addToCart } = useCart();
